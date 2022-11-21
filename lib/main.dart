@@ -1,3 +1,5 @@
+import 'package:bmi_calculator/screens/request_screen.dart';
+import 'package:bmi_calculator/screens/result_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(BMICalculator());
@@ -6,29 +8,27 @@ class BMICalculator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: InputPage(),
-    );
-  }
-}
-
-class InputPage extends StatefulWidget {
-  @override
-  _InputPageState createState() => _InputPageState();
-}
-
-class _InputPageState extends State<InputPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+      // customize dark theme
+      theme: ThemeData.dark().copyWith(
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: Color(0xFF0A0E21),
+          secondary: Colors.purple,
+        ),
+        textTheme: TextTheme(
+          bodyText2: TextStyle(
+            color: Color(0xFFFFFFFF), // white
+          ),
+        ),
       ),
-      body: Center(
-        child: Text('Body Text'),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-      ),
+      initialRoute: '/request',
+      routes: {
+        '/request': (context) => RequestScreen(),
+        ResultScreen.routeName: (context) => ResultScreen(
+              bmiResult: '',
+              resultText: '',
+              interpretation: '',
+            ),
+      },
     );
   }
 }
